@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://genmarket-three.vercel.app"><img src="https://img.shields.io/badge/live-genmarket-a3e635?style=flat-square&labelColor=0a0b0e" alt="live" /></a>
+  <a href="https://genmarketthree.vercel.app"><img src="https://img.shields.io/badge/live-genmarket-a3e635?style=flat-square&labelColor=0a0b0e" alt="live" /></a>
   <a href="https://explorer-bradbury.genlayer.com/address/0x9526cfB6ECcDDB50f7886474c5088983FfBAC0E8"><img src="https://img.shields.io/badge/contract-0x9526…C0E8-38bdf8?style=flat-square&labelColor=0a0b0e" alt="contract" /></a>
   <img src="https://img.shields.io/badge/GenLayer-Bradbury%20%C2%B7%204221-6366f1?style=flat-square&labelColor=0a0b0e" alt="network" />
   <img src="https://img.shields.io/badge/license-MIT-9aa4b4?style=flat-square&labelColor=0a0b0e" alt="license" />
