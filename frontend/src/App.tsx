@@ -80,7 +80,7 @@ export function App({ onBack }: { onBack?: () => void }) {
   const onBuy = async () => {
     if (!address || !cur) return;
     setErr(""); setBusy("Paying into escrow…");
-    try { await purchase(address as Hex, cur.id); await loadListing(cur.id); await refresh(); }
+    try { await purchase(address as Hex, cur.id, cur.priceAtto); await loadListing(cur.id); await refresh(); }
     catch (e: any) { setErr(e?.message || "Purchase failed"); } finally { setBusy(""); }
   };
   const onConfirm = async () => {

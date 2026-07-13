@@ -99,9 +99,11 @@ export async function createListing(account: Hex, l: { title: string; category: 
   const s = await marketStats();
   return Math.max(0, s.listings - 1);
 }
-export async function purchase(account: Hex, listingId: number): Promise<void> {
+export async function purchase(account: Hex, listingId: number, priceAtto: string): Promise<void> {
   const wc = await writeClient(account);
-  const h = (await wc.writeContract({ address: CONTRACT_ADDRESS as Hex, functionName: "purchase", args: [listingId], value: 0n })) as Hex;
+  const value = BigInt(priceAtto);
+  if (value <= 0n) throw new Error("Invalid listing price");
+  const h = (await wc.writeContract({ address: CONTRACT_ADDRESS as Hex, functionName: "purchase", args: [listingId], value })) as Hex;
   await waitAccepted(wc, h);
 }
 export async function confirmReceived(account: Hex, orderId: number): Promise<void> {

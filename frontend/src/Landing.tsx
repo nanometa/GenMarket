@@ -85,7 +85,7 @@ export function Landing({ onLaunch }: { onLaunch: () => void }) {
         </div>
         <div className="lp-foot">
           <span>GenMarket, a trustless secondhand marketplace on GenLayer.</span>
-          <span className="mono">Testnet Bradbury · escrow is notional</span>
+          <span className="mono">Testnet Bradbury · escrow settled in GEN</span>
         </div>
       </section>
     </div>

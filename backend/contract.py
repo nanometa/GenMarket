@@ -26,6 +26,17 @@ BROWSE_CAP = 300
 CONDITIONS = ("new", "like-new", "good", "fair", "for-parts")
 
 
+@gl.evm.contract_interface
+class _NativeRecipient:
+    """Minimal chain-layer interface used for GEN transfers to EOAs."""
+
+    class View:
+        pass
+
+    class Write:
+        pass
+
+
 def _s(v, cap):
     t = v if isinstance(v, str) else str(v)
     return t.strip()[:cap]
@@ -134,6 +145,19 @@ class GenMarket(gl.Contract):
             raise gl.vm.UserError("no valid claims found")
         return built
 
+    def _transfer_gen(self, recipient: Address, amount: int) -> None:
+        if amount > 0:
+            # EOA transfers are external messages and therefore execute only
+            # when the settlement transaction is finalized.
+            _NativeRecipient(recipient).emit_transfer(value=u256(amount))
+
+    def _settle(self, order_id: u32, refund: int, release: int) -> None:
+        o = self._get_order(order_id)
+        if refund < 0 or release < 0 or refund + release != int(o.amount):
+            raise gl.vm.UserError("invalid settlement amounts")
+        self._transfer_gen(o.buyer, refund)
+        self._transfer_gen(o.seller, release)
+
     def _card(self, i: int, l: Listing) -> dict:
         return {
             "listing_id": i,
@@ -190,13 +214,15 @@ class GenMarket(gl.Contract):
         self.n_listings = u32(lid + 1)
         return u32(lid)
 
-    @gl.public.write
+    @gl.public.write.payable
     def purchase(self, listing_id: u32) -> u32:
         l = self._get_listing(listing_id)
         if l.state != "LISTED" or bool(l.bought):
             raise gl.vm.UserError("item is not available")
         if _hex(l.seller) == _hex(gl.message.sender_address):
             raise gl.vm.UserError("seller cannot buy own item")
+        if int(gl.message.value) != int(l.price):
+            raise gl.vm.UserError("purchase value must equal listing price")
         oid = int(self.n_orders)
         self.orders[u32(oid)] = Order(
             listing_id=u32(int(listing_id)),
@@ -235,6 +261,7 @@ class GenMarket(gl.Contract):
         o.outcome = "RELEASE"
         o.release_to_seller = o.amount
         self.orders[u32(int(order_id))] = o
+        self._settle(order_id, 0, int(o.amount))
         return "RELEASED"
 
     @gl.public.write
@@ -405,6 +432,7 @@ class GenMarket(gl.Contract):
         o2.summary = summary
         o2.verdicts_json = json.dumps(rows)[:3500]
         self.orders[u32(int(order_id))] = o2
+        self._settle(order_id, refund, release)
         if refund > 0:
             self.n_refunded = u32(int(self.n_refunded) + 1)
         return outcome

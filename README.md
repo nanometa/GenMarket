@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://genmarket-three.vercel.app"><img src="https://img.shields.io/badge/live-genmarket-a3e635?style=flat-square&labelColor=0a0b0e" alt="live" /></a>
-  <a href="https://explorer-bradbury.genlayer.com/address/0x2cd2E45bbA4B2533375064803Dc5483995699A01"><img src="https://img.shields.io/badge/contract-0x2cd2…9A01-38bdf8?style=flat-square&labelColor=0a0b0e" alt="contract" /></a>
+  <a href="https://explorer-bradbury.genlayer.com/address/0x9526cfB6ECcDDB50f7886474c5088983FfBAC0E8"><img src="https://img.shields.io/badge/contract-0x9526…C0E8-38bdf8?style=flat-square&labelColor=0a0b0e" alt="contract" /></a>
   <img src="https://img.shields.io/badge/GenLayer-Bradbury%20%C2%B7%204221-6366f1?style=flat-square&labelColor=0a0b0e" alt="network" />
   <img src="https://img.shields.io/badge/license-MIT-9aa4b4?style=flat-square&labelColor=0a0b0e" alt="license" />
 </p>
@@ -61,7 +61,7 @@ Read straight from the deployed contract on GenLayer Bradbury.
 
 | | |
 | --- | --- |
-| Contract | [`0x2cd2…9A01`](https://explorer-bradbury.genlayer.com/address/0x2cd2E45bbA4B2533375064803Dc5483995699A01) |
+| Contract | [`0x9526…C0E8`](https://explorer-bradbury.genlayer.com/address/0x9526cfB6ECcDDB50f7886474c5088983FfBAC0E8) |
 | Listings / Sold | **1 / 1** |
 | Disputes / Refunds | **1 / 1** |
 
