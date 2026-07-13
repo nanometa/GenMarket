@@ -55,17 +55,16 @@ opinion:
 Buyer text and any fetched page are handled as untrusted input: capped, delimiter-wrapped, and the model
 is instructed to ignore any commands hidden inside them and to never emit a number.
 
-## Live example
+## Live contract
 
 Read straight from the deployed contract on GenLayer Bradbury.
 
 | | |
 | --- | --- |
 | Contract | [`0x9526…C0E8`](https://explorer-bradbury.genlayer.com/address/0x9526cfB6ECcDDB50f7886474c5088983FfBAC0E8) |
-| Listings / Sold | **1 / 1** |
-| Disputes / Refunds | **1 / 1** |
 
-One order was carried end to end as a live test, each step on the explorer:
+The transaction trail below is a settlement example from the previous deployment; the current
+contract starts with clean state and implements real payable escrow transfers.
 
 | Step | What happened | |
 | --- | --- | --- |
